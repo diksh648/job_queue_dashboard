@@ -3,7 +3,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
 type Status = 'pending' | 'running' | 'completed' | 'failed';
 type Job = { id: string; title: string; type: string; status: Status; createdAt: string };
 const statuses: Status[] = ['pending', 'running', 'completed', 'failed'];
-const API = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+const API = import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? 'http://localhost:3000' : '/api');
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API}${path}`, { headers: { 'Content-Type': 'application/json' }, ...options });
